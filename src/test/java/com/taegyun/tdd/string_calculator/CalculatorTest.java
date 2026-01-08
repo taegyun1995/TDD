@@ -13,4 +13,11 @@ class CalculatorTest {
         Assertions.assertThat(calculator.add(null)).isEqualTo(0);
         Assertions.assertThat(calculator.add("")).isEqualTo(0);
     }
+
+    @Test
+    void 숫자_하나면_해당_숫자를_반환한다() {
+        Calculator calculator = new Calculator();
+
+        Assertions.assertThat(calculator.add("7")).isEqualTo(7);
+    }
 }
