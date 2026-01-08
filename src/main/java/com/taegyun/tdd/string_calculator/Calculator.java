@@ -2,16 +2,24 @@ package com.taegyun.tdd.string_calculator;
 
 public class Calculator {
 
-    public int add(String text) {
-        if (text == null || text.isEmpty()) {
+    public int add(String numbers) {
+        if (numbers == null || numbers.isEmpty()) {
             return 0;
         }
 
+        String delimiter = ",|\n";
+
+        // 커스텀 구분자 처리
+        if (numbers.startsWith("//")) {
+            int newlineIndex = numbers.indexOf("\n");
+            delimiter = numbers.substring(2, newlineIndex);
+            numbers = numbers.substring(newlineIndex + 1);
+        }
+
         int result = 0;
-        String[] split = text.split(",|\n");
+        String[] split = numbers.split(delimiter);
         for (String s : split) {
-            int integer = Integer.parseInt(s.trim());
-            result += integer;
+            result += Integer.parseInt(s.trim());
         }
 
         return result;
