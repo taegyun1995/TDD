@@ -40,4 +40,15 @@ class CalculatorTest {
         Assertions.assertThat(calculator.add("//|\n1|2|3")).isEqualTo(6);
         Assertions.assertThat(calculator.add("//-\n1-2-3")).isEqualTo(6);
     }
+
+    @Test
+    void 음수가_포함되면_예외를_발생시킨다() {
+        Calculator calculator = new Calculator();
+
+        Assertions.assertThatThrownBy(() -> calculator.add("-1,2,-3"))
+                  .isInstanceOf(RuntimeException.class)
+                  .hasMessage("음수는 허용되지 않습니다: -1, -3")
+                  .hasMessageContaining("-1")
+                  .hasMessageContaining("-3");
+    }
 }

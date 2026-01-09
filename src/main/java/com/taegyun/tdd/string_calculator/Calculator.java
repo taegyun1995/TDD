@@ -1,5 +1,7 @@
 package com.taegyun.tdd.string_calculator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class Calculator {
@@ -20,8 +22,23 @@ public class Calculator {
 
         int result = 0;
         String[] split = numbers.split(delimiter);
+        List<Integer> negativeNumbers = new ArrayList<>();
+
         for (String s : split) {
-            result += Integer.parseInt(s.trim());
+            int number = Integer.parseInt(s.trim());
+
+            if (number < 0) {
+                negativeNumbers.add(number);
+            }
+            result += number;
+        }
+
+        if (!negativeNumbers.isEmpty()) {
+            String negativeStr = String.join(
+                    ", ",
+                    negativeNumbers.stream().map(String::valueOf).toList()
+            );
+            throw new RuntimeException("음수는 허용되지 않습니다: " + negativeStr);
         }
 
         return result;
