@@ -43,12 +43,19 @@ class CalculatorTest {
 
     @Test
     void 음수가_포함되면_예외를_발생시킨다() {
-        Calculator calculator = new Calculator();
-
         Assertions.assertThatThrownBy(() -> calculator.add("-1,2,-3"))
                   .isInstanceOf(RuntimeException.class)
                   .hasMessage("음수는 허용되지 않습니다: -1, -3")
                   .hasMessageContaining("-1")
                   .hasMessageContaining("-3");
+    }
+
+    @Test
+    void 숫자가_아닌_값은_예외를_발생시킨다() {
+        Assertions.assertThatThrownBy(() -> calculator.add("ㄱ,2,ㄷ"))
+                  .isInstanceOf(RuntimeException.class)
+                  .hasMessage("숫자가 아닌 값이 포함되어 있습니다: ㄱ, ㄷ")
+                  .hasMessageContaining("ㄱ")
+                  .hasMessageContaining("ㄷ");
     }
 }

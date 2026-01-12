@@ -23,14 +23,29 @@ public class Calculator {
         int result = 0;
         String[] split = numbers.split(delimiter);
         List<Integer> negativeNumbers = new ArrayList<>();
+        List<String> invalidValues = new ArrayList<>();
 
         for (String s : split) {
-            int number = Integer.parseInt(s.trim());
+            String trimmed = s.trim();
+            int number;
+
+            try {
+                number = Integer.parseInt(trimmed);
+            } catch (NumberFormatException e) {
+                invalidValues.add(trimmed);
+                continue;
+            }
 
             if (number < 0) {
                 negativeNumbers.add(number);
             }
+
             result += number;
+        }
+
+        if (!invalidValues.isEmpty()) {
+            String invalidStr = String.join(", ", invalidValues);
+            throw new RuntimeException("숫자가 아닌 값이 포함되어 있습니다: " + invalidStr);
         }
 
         if (!negativeNumbers.isEmpty()) {
