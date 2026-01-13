@@ -61,4 +61,9 @@ class CalculatorTest {
         Assertions.assertThat(calculator.add("2,1001")).isEqualTo(2);
         Assertions.assertThat(calculator.add("1000,1001,999")).isEqualTo(1999);
     }
+
+    @Test
+    void 대괄호를_사용하여_여러개의_커스텀_구분자를_사용하여_숫자의_합을_반환한다() {
+        Assertions.assertThat(calculator.add("//[*][%]\n1*2%3")).isEqualTo(6);
+    }
 }
