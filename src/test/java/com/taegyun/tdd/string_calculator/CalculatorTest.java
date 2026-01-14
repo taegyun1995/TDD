@@ -66,4 +66,14 @@ class CalculatorTest {
     void 대괄호를_사용하여_여러개의_커스텀_구분자를_사용하여_숫자의_합을_반환한다() {
         Assertions.assertThat(calculator.add("//[*][%]\n1*2%3")).isEqualTo(6);
     }
+
+    @Test
+    void 뺄셈_연산을_사용하여_첫번째_숫자에서_나머지_숫자들을_뺀_결과를_반환한다() {
+        Assertions.assertThat(calculator.subtract("10,3,2")).isEqualTo(5);
+    }
+
+    @Test
+    void 뺄셈도_커스텀_구분자를_지원한다() {
+        Assertions.assertThat(calculator.subtract("//;\n10;3;2")).isEqualTo(5);
+    }
 }
